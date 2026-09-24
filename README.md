@@ -1,13 +1,13 @@
-# 🌌 ZeroTranslate — Instant On-Screen Translation Suite
+﻿# 🌌 ZTranslate — Instant On-Screen Translation Suite
 
-[![Type: Desktop Application](https://img.shields.io/badge/Type-Desktop%20Application-007ACC?style=flat-square&logo=windows)](https://github.com/kzxl/ZeroTranslate)
+[![Type: Desktop Application](https://img.shields.io/badge/Type-Desktop%20Application-007ACC?style=flat-square&logo=windows)](https://github.com/kzxl/ZTranslate)
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-ZeroUniverse-8A2BE2?style=flat-square)](https://github.com/kzxl/ZeroUniverse)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20x64-0078D6?style=flat-square&logo=windows)](https://dotnet.microsoft.com/)
-[![Distribution: Standalone Single-File](https://img.shields.io/badge/Distribution-Standalone%20Single--File-2ea44f?style=flat-square)](https://github.com/kzxl/ZeroTranslate)
+[![Distribution: Standalone Single-File](https://img.shields.io/badge/Distribution-Standalone%20Single--File-2ea44f?style=flat-square)](https://github.com/kzxl/ZTranslate)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 
-**ZeroTranslate** is a lightweight, blazing-fast desktop translation tool for Windows. Designed with C# WPF and .NET 8, it provides an exceptionally smooth, distraction-free translation experience directly at your cursor. Part of the sovereign **ZeroUniverse** application suite, it guarantees low resource overhead and instantaneous response times.
+**ZTranslate** is a lightweight, blazing-fast desktop translation tool for Windows. Designed with C# WPF and .NET 8, it provides an exceptionally smooth, distraction-free translation experience directly at your cursor. Part of the sovereign **ZeroUniverse** application suite, it guarantees low resource overhead and instantaneous response times.
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## 📦 Deployment & Binaries
 
-ZeroTranslate is distributed in two deployment formats. Run `build.ps1` to compile:
+ZTranslate is distributed in two deployment formats. Run `build.ps1` to compile:
 
 - **Lightweight Build (~5MB)**: Ultra-fast executable. Requires the `.NET 8 Desktop Runtime`.
 - **Standalone Build (~68MB)**: Fully self-contained single file executable. Runs out-of-the-box on any 64-bit Windows machine without external dependencies.

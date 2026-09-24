@@ -1,12 +1,12 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using ZeroTranslate.Services;
+using ZTranslate.Services;
 
-namespace ZeroTranslate.Tests;
+namespace ZTranslate.Tests;
 
 public class LocalLlmEngineTests
 {

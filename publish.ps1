@@ -1,5 +1,5 @@
-<#
-    publish.ps1 — Publish script for ZeroTranslate (Dual Mode: Full & Lite)
+﻿<#
+    publish.ps1 — Publish script for ZTranslate (Dual Mode: Full & Lite)
     Adheres to AgentOption .NET Publish Release standard & ZeroUniverse rules.
 #>
 [CmdletBinding()]
@@ -12,7 +12,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $Root = $PSScriptRoot
-$Proj = Join-Path $Root "ZeroTranslate\ZeroTranslate.csproj"
+$Proj = Join-Path $Root "ZTranslate\ZTranslate.csproj"
 $Dist = Join-Path $Root "publish"
 
 if (Test-Path $Dist) {
@@ -20,7 +20,7 @@ if (Test-Path $Dist) {
 }
 
 if ($Mode -eq 'Full' -or $Mode -eq 'All') {
-    Write-Host ">>> Publishing ZeroTranslate FULL (Self-Contained Single File)..." -ForegroundColor Cyan
+    Write-Host ">>> Publishing ZTranslate FULL (Self-Contained Single File)..." -ForegroundColor Cyan
     $outFull = Join-Path $Dist "full"
     dotnet publish $Proj -c $Configuration -r $Runtime --self-contained true `
         -p:PublishSingleFile=true `
@@ -28,17 +28,17 @@ if ($Mode -eq 'Full' -or $Mode -eq 'All') {
         -p:EnableCompressionInSingleFile=true `
         -p:PublishReadyToRun=true `
         -o $outFull
-    Write-Host "  ✔ Full build generated at: $outFull\ZeroTranslate.exe" -ForegroundColor Green
+    Write-Host "  ✔ Full build generated at: $outFull\ZTranslate.exe" -ForegroundColor Green
 }
 
 if ($Mode -eq 'Lite' -or $Mode -eq 'All') {
-    Write-Host ">>> Publishing ZeroTranslate LITE (Framework-Dependent Single File)..." -ForegroundColor Cyan
+    Write-Host ">>> Publishing ZTranslate LITE (Framework-Dependent Single File)..." -ForegroundColor Cyan
     $outLite = Join-Path $Dist "lite"
     dotnet publish $Proj -c $Configuration -r $Runtime --self-contained false `
         -p:PublishSingleFile=true `
         -p:PublishReadyToRun=true `
         -o $outLite
-    Write-Host "  ✔ Lite build generated at: $outLite\ZeroTranslate.exe" -ForegroundColor Green
+    Write-Host "  ✔ Lite build generated at: $outLite\ZTranslate.exe" -ForegroundColor Green
 }
 
-Write-Host ">>> ZeroTranslate publish completed successfully!" -ForegroundColor Green
+Write-Host ">>> ZTranslate publish completed successfully!" -ForegroundColor Green
