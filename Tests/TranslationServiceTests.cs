@@ -1,9 +1,9 @@
-﻿using ZeroTranslate.Helpers;
-using ZeroTranslate.Models;
-using ZeroTranslate.Services;
+﻿using ZTranslate.Helpers;
+using ZTranslate.Models;
+using ZTranslate.Services;
 using Xunit;
 
-namespace ZeroTranslate.Tests;
+namespace ZTranslate.Tests;
 
 public class TranslationServiceTests
 {

@@ -1,54 +1,77 @@
-# 🌌 ZeroTranslate — Instant On-Screen Translation Suite
+﻿# ZTranslate — Instant On-Screen Translator & Subtitle HUD for Windows
 
-[![Platform](https://img.shields.io/badge/.NET-8.0%20WPF-512BD4?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
-[![Windows](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![Ecosystem](https://img.shields.io/badge/Ecosystem-ZeroUniverse-6366F1?style=flat-square)](https://github.com/kzxl/ZeroUniverse)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-0078D6?style=flat-square&logo=windows)](https://dotnet.microsoft.com/)
+[![Stack](https://img.shields.io/badge/.NET-8.0%20WPF-512BD4?style=flat-square&logo=dotnet)](ZTranslate/ZTranslate.csproj)
+[![Offline AI](https://img.shields.io/badge/Offline%20LLM-Ollama%20%7C%20LM%20Studio-2ea44f?style=flat-square)](#key-features)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/kzxl/ZTranslate?style=social)](https://github.com/kzxl/ZTranslate/stargazers)
 
-**ZeroTranslate** is a lightweight, blazing-fast desktop translation tool for Windows. Designed with C# WPF and .NET 8, it provides an exceptionally smooth, distraction-free translation experience directly at your cursor. Part of the sovereign **ZeroUniverse** application suite, it guarantees low resource overhead and instantaneous response times.
-
----
-
-## 🚀 Key Features
-
-*   **⚡ Instantly Translate Anywhere**: Highlight text in any application and press your configured hotkey to immediately view translations without switching browser tabs.
-*   **🖱️ Smart Floating Popup**: Press `Ctrl + Q` to open a sleek, transparent translation popup near your cursor. It automatically dismisses when clicking outside.
-*   **🖥️ Detailed Main Window**: Press `Ctrl + Enter` to open a full window for editing lengthy translations, checking character counts, and browsing comprehensive dictionary outputs.
-*   **🧠 Intelligent Auto-Language Flipper**: Advanced context detection automatically reverses source and target languages when matching native text (e.g., Vietnamese ➔ English automatically).
-*   **🔀 Quick Language Swapping**: 1-click reversal of Source and Target languages in both the Main and Popup windows.
-*   **🌙 Dark Mode First**: Features a modern Dark UI with glassmorphism effects, ensuring zero eye strain during late-night programming or research sessions.
-*   **⚙️ Multi-Engine Extensibility**: Modular provider architecture currently supporting *MyMemory*, with extensible adapters for Google, Bing, and DeepL engines.
+> **Lightweight Windows desktop translation suite (.NET 8 WPF) with instant cursor popup, screen capture OCR, real-time subtitle HUD, text-to-speech, and offline Local LLM (Ollama / LM Studio) translation.**
 
 ---
 
-## ⌨️ Default Hotkeys
+## Key Features
 
-- `Ctrl + Q`: Activate Floating Popup Translation.
-- `Ctrl + Enter`: Open Detailed Main Translation Window.
-- `Esc`: Close open translation windows immediately.
-
----
-
-## 📦 Deployment & Binaries
-
-ZeroTranslate is distributed in two deployment formats. Run `build.ps1` to compile:
-
-- **Lightweight Build (~5MB)**: Ultra-fast executable. Requires the `.NET 8 Desktop Runtime`.
-- **Standalone Build (~68MB)**: Fully self-contained single file executable. Runs out-of-the-box on any 64-bit Windows machine without external dependencies.
-
-Outputs are generated in `PublishOutput/Lightweight/` and `PublishOutput/Standalone/`.
+- **Instant Cursor Popup (`Ctrl + Q`)**: Highlight text in any Windows app and press a hotkey to view a sleek, auto-dismissing dark glassmorphism popup right at your cursor.
+- **Detailed Translation Window (`Ctrl + Enter`)**: Full editor for long passages, language swapping, history lookup, and TTS playback.
+- **Real-Time Subtitle HUD**: Always-on-top transparent subtitle overlay (`SubtitleHudWindow`) for live reading, videos, or meetings.
+- **Offline Local LLM Engine**: Native OpenAI-compatible Local LLM translation provider (`LocalLlmTranslateEngine`) supporting **Ollama** and **LM Studio** with zero cloud data leakage.
+- **Multi-Engine Registry**: Switch seamlessly between **Google Translate**, **Lingva**, **MyMemory**, and **Local LLM** backends.
+- **Screen Capture OCR**: Built-in region capture overlay backed by Windows OCR (`WindowsOcrEngine`) to translate text inside images, PDFs, or games.
+- **Smart Auto-Language Flip & TTS**: Detects native language to automatically swap source/target directions and reads translations aloud via `WindowsTtsService`.
 
 ---
 
-## 🛠️ Internal Architecture
+## Default Hotkeys
 
-Built with strict MVVM separation in C# WPF:
-*   `Windows API`: Global Keyboard Hooks (`SetWindowsHookEx`) to listen for hotkeys globally without stealing focus.
-*   `SendKeys API`: Automates system clipboard interaction (`^c`) for blazing-fast 10ms text capturing from foreign windows.
-*   `Dependency Injection`: Autofac container decoupling translation providers, hotkey listeners, and UI views.
+| Shortcut | Action |
+| :--- | :--- |
+| `Ctrl + Q` | Show Floating Popup Translation at cursor |
+| `Ctrl + Enter` | Open Detailed Main Translation Window |
+| `Esc` | Dismiss active translation popup / window |
 
 ---
 
-## 📄 License
+## Quick Start & Build
 
-Licensed under the **MIT License**. Part of the sovereign **ZeroUniverse** industrial computing ecosystem.
+### Prerequisites
+- Windows 10 (1809+) or Windows 11 (x64)
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (to build from source) or [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) (for Lite build)
+- Optional: [Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/) for offline Local LLM translation
+
+### Build & Publish
+
+```powershell
+git clone https://github.com/kzxl/ZTranslate.git
+cd ZTranslate
+
+# Run unit tests
+dotnet test
+
+# Publish lightweight single-file executable (requires .NET 8 Desktop Runtime)
+.\publish.ps1 -Mode Lite
+
+# Or publish self-contained single-file executable (zero runtime prerequisites)
+.\publish.ps1 -Mode Full
+```
+
+Published executables are generated under `publish/lite/` and `publish/full/`.
+
+---
+
+## Architecture
+
+Built with clean MVVM separation and `Microsoft.Extensions.DependencyInjection` in C# WPF:
+- **Global Input & Capture**: Win32 keyboard hooks (`SetWindowsHookEx`) and selection/clipboard orchestration (`TextSelectionMonitor`, `ClipboardService`).
+- **Pluggable Engines**: `ITranslationEngine` implementations registered via `TranslationEngineRegistry` (`GoogleTranslateEngine`, `LingvaTranslateEngine`, `MyMemoryTranslateEngine`, `LocalLlmTranslateEngine`).
+- **Windows Native Services**: `WindowsOcrEngine` for region OCR and `WindowsTtsService` for speech synthesis.
+
+---
+
+## License
+
+Licensed under the [MIT License](LICENSE). Part of the [`ZeroUniverse`](https://github.com/kzxl/ZeroUniverse) ecosystem.
+
+---
+
+If **ZTranslate** speeds up your daily reading or workflow, consider giving it a ⭐ on GitHub!
